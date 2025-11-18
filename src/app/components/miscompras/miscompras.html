@@ -1,0 +1,16 @@
+@for (compra of compras(); track $index) {
+<div class="bg-white shadow-md rounded-lg p-4 m-4">
+  <p class="text-sm text-gray-500">
+    Fecha: <span class="font-medium">{{ compra.fechaPedido }}</span>
+  </p>
+  <p class="text-gray-700">
+    Cubo: <span class="font-semibold">{{ compra.idCubo }}</span>
+  </p>
+  <p class="text-gray-700">
+    Pedido: <span class="font-semibold">{{ compra.idPedido }}</span>
+  </p>
+  <p class="text-gray-700">
+    Usuario: <span class="font-semibold">{{ compra.idUsuario }}</span>
+  </p>
+</div>
+}

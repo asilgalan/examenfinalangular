@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Navbar con Dropdown - Tailwind CSS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gray-100">
+    <!-- Navbar -->
+    <nav class="bg-white shadow-lg">
+      <div class="max-w-7xl mx-auto px-4">
+        <div class="flex justify-between">
+          <!-- Logo y menú principal -->
+          <div class="flex space-x-7">
+            <div>
+              <!-- Logo -->
+              <a href="#" class="flex items-center py-4 px-2">
+                <span class="font-semibold text-green-500 border-green-500 border-b-4 text-lg"
+                  >MiApp</span
+                >
+              </a>
+            </div>
+            <!-- Menú principal -->
+            <div class="hidden md:flex items-center space-x-1">
+              @if(mostrarLogin()){
+              <button
+                type="button"
+                (click)="logout()"
+                class="py-4 px-2 font-semibold text-gray-500 hover:text-gray-700 cursor-pointer"
+              >
+                Logout
+              </button>
+
+              <a
+                routerLink="/perfil"
+                class="py-4 px-2 text-gray-500 font-semibold hover:text-green-500 transition duration-300"
+                >Perfil Usuario</a
+              >
+              <a
+                routerLink="/misCompras"
+                class="py-4 px-2 text-gray-500 font-semibold hover:text-green-500 transition duration-300"
+              >
+                mis compras</a
+              >
+              }@else {
+              <a routerLink="/login" class="py-4 text-gray-500 px-2 font-semibold">Login</a>
+
+              }
+            </div>
+          </div>
+          <!-- Menú secundario con dropdown -->
+          <div class="hidden md:flex items-center space-x-3">
+            <!-- Dropdown container -->
+            <div class="relative group">
+              <button
+                class="py-2 px-4 bg-green-500 text-white font-semibold rounded-lg hover:bg-green-600 transition duration-300 flex items-center"
+              >
+                <span>Marcas</span>
+                <!-- Flecha del dropdown -->
+                <svg
+                  class="w-4 h-4 ml-1"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M19 9l-7 7-7-7"
+                  ></path>
+                </svg>
+              </button>
+              <!-- Dropdown menu -->
+              <div
+                class="absolute right-0 w-48 mt-2 py-2 bg-white rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-10"
+              >
+                @for (cubos of cubosmarcas(); track $index) {
+                <a
+                  routerLink="/marca/{{ cubos }}"
+                  class="block px-4 py-2 text-gray-800 hover:bg-green-500 hover:text-white"
+                  >{{ cubos }}</a
+                >
+                }
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Menú móvil -->
+    </nav>
+
+    <router-outlet></router-outlet>
+  </body>
+</html>
